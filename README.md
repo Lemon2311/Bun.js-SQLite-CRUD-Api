@@ -1,42 +1,17 @@
-# bunJsSQLiteCRUDApi.js Usage Guide
+# bunJsSQLiteCRUDApi
 
-CRUD.js is a JavaScript module that provides a set of functions for performing basic CRUD (Create, Read, Update, Delete) operations on a SQLite database. It uses the `bunJsSQLiteHelper.js` module for interacting with the database.
+# API Usage Guide
 
-## Functions
+This API provides endpoints for performing basic CRUD (Create, Read, Update, Delete) operations on a SQLite database.
 
-1. **insert(table, attributes)**: This function inserts a new row into the specified table. The `attributes` parameter is an object where the keys are column names and the values are the corresponding values to be inserted.
+## Endpoints
 
-2. **createTable(name, attributes)**: This function creates a new table with the specified name and attributes. The `attributes` parameter is an object where the keys are column names and the values are the corresponding data types.
+1. **POST /api/createTable**: This endpoint creates a new table. Send a JSON body with `name` as the table name and `attributes` as an object where the keys are column names and the values are the corresponding data types.
 
-3. **remove(table, attributes)**: This function deletes rows from the specified table. The `attributes` parameter is an object where the keys are column names and the values are the corresponding values that the rows to be deleted should have.
+2. **POST /api/insert**: This endpoint inserts a new row into a table. Send a JSON body with `table` as the table name, `attributes` as an object where the keys are column names and the values are the corresponding values to be inserted.
 
-4. **select(table, attributes)**: This function retrieves rows from the specified table. The `attributes` parameter is an object where the keys are column names and the values are the corresponding values that the rows to be retrieved should have.
+3. **DELETE /api/remove**: This endpoint deletes rows from a table. Send a JSON body with `table` as the table name and `attributes` as an object where the keys are column names and the values are the corresponding values that the rows to be deleted should have.
 
-5. **update(table, setAttributes, whereAttributes)**: This function updates rows in the specified table. The `setAttributes` parameter is an object where the keys are column names and the values are the new values that should be set. The `whereAttributes` parameter is an object where the keys are column names and the values are the corresponding values that the rows to be updated should have.
+4. **GET /api/select**: This endpoint retrieves rows from a table. Send query parameters with `table` as the table name and `attributes` as a JSON string where the keys are column names and the values are the corresponding values that the rows to be retrieved should have.
 
-## Usage
-
-First, import the CRUD.js module:
-
-```javascript
-const crud = require('./bunJsSQLiteCRUDApi.js');
-```
-
-Then, you can use the functions like this:
-
-```javascript
-// Create a table
-crud.createTable('users', { id: 'INTEGER PRIMARY KEY', name: 'TEXT', email: 'TEXT' });
-
-// Insert a row
-crud.insert('users', { name: 'John Doe', email: 'john@example.com' });
-
-// Select rows
-const users = crud.select('users', { name: 'John Doe' });
-
-// Update a row
-crud.update('users', { email: 'john.doe@example.com' }, { name: 'John Doe' });
-
-// Remove a row
-crud.remove('users', { name: 'John Doe' });
-```
+5. **PUT /api/update**: This endpoint updates rows in a table. Send query parameters with `table` as the table name and `whereAttributes` as a JSON string where the keys are column names and the values are the corresponding values that the rows to be updated should have. Send a JSON body with the new values to be set.
