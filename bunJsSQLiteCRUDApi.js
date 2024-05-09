@@ -1,4 +1,4 @@
-import { insert, createTable, remove, select, update } from "./main.js";
+import { insert, createTable, remove, select, update } from "./bunJsSQLiteHelper.js";
 
 const express = require("express");
 const app = express();
